@@ -2,48 +2,35 @@ import React, { useState, useEffect } from "react";
 
 import GoogleMapReact from "google-map-react";
 
-const defaultCenter = {
-  position: {
-    lat: 40.7128,
-    lng: -74.0059,
-  },
+const home = {
+  id: 1,
+  name: "Home",
+  position: { lat: 37.7889, lng: -122.5194 },
+  zoom: 14,
 };
-const defaultZoom = 11;
 
-const locations = [
-  {
-    id: 1,
-    name: "Marker 1",
-    position: { lat: 37.7749, lng: -122.4194 },
-    zoom: 14,
-  },
-  {
-    id: 2,
-    name: "Marker 2",
-    position: { lat: 37.7749, lng: -122.4094 },
-    zoom: 14,
-  },
-  {
-    id: 3,
-    name: "Marker 3",
-    position: { lat: 37.7649, lng: -122.4194 },
-    zoom: 14,
-  },
-];
+const Map = (props) => {
+  console.log("Line 13:props", props);
 
-const Map = () => {
+  localStorage.setItem(
+    "home",
+    JSON.stringify({ center: home.position, zoom: home.zoom })
+  );
+
+  //   const [startLocation, setStartLocation] = useState(home);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [center, setCenter] = useState(
-    JSON.parse(localStorage.getItem("center")) || defaultCenter.position
+    JSON.parse(localStorage.getItem("center")) || home.position
   );
   const [zoom, setZoom] = useState(
-    JSON.parse(localStorage.getItem("zoom")) || defaultZoom
+    JSON.parse(localStorage.getItem("zoom")) || home.zoom
   );
-
   useEffect(() => {
     if (selectedLocation) {
       setCenter(selectedLocation.position);
-      setZoom(selectedLocation.zoom || zoom);
+      const newZoom =
+        selectedLocation.zoom !== undefined ? selectedLocation.zoom : zoom;
+      setZoom(newZoom);
       localStorage.setItem("center", JSON.stringify(selectedLocation.position));
     }
   }, [selectedLocation, zoom]);
@@ -68,11 +55,15 @@ const Map = () => {
       ></GoogleMapReact>
       <h1>Locations</h1>
       <ul>
-        {locations.map((location) => (
-          <li key={location.id} onClick={() => handleLocationClick(location)}>
-            {location.name}
-          </li>
-        ))}
+        {props.locations ? (
+          props.locatios.map((location) => (
+            <li key={location.id} onClick={() => handleLocationClick(location)}>
+              {location.name}
+            </li>
+          ))
+        ) : (
+          <h1>Loading...</h1>
+        )}
       </ul>
     </div>
   );
