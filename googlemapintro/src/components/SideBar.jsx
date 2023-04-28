@@ -2,7 +2,7 @@ import React from "react";
 
 const Sidebar = () => {
     return (
-        <div className="sidebar">
+        <div className="text-center">
             Side Bar
         </div>
     )
