@@ -1,13 +1,19 @@
 import React from "react";
+import {useState, useEffect} from 'react'
+import { useSelector, useDispatch } from "react-redux";
 
-const Locations = (props) => {
-    const { locationList } = props;
-    console.log('Line 5 Locations>>>', locationList)
+
+
+const Locations = () => {
+    const {locationList} = useSelector((state) => state.locationList);
+    console.log('Line 9 locationList>>>', locationList)
+
+    
 
     return (
         <div>
              <ul>
-        {locationList ? (
+        {locationList.length > 0 ? (
           locationList.map((location) => (
             <li key={location.id}>
               {location.name}
