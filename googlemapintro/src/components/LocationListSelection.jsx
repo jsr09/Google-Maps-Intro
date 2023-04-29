@@ -3,7 +3,7 @@ import React  from "react";
 
 
 
-const Sidebar = (props) => {
+const LocationListSelection = (props) => {
     const {updateListData} = props;
 
     const handleClick = (newListData) => {
@@ -12,8 +12,8 @@ const Sidebar = (props) => {
 
   return (
     <>
-      <div className="text-center">Side Bar</div>
-      <div className="bg-gradient-to-b from-blue-100 to-blue-500 border-r-2 w-2/5 text-white flex flex-col justify-center">
+      <div className="text-center">List</div>
+      
         <div className="w-2/3 mx-auto">
           <button className="w-full bg-white text-blue-500 font-bold py-2 px-4 rounded-full mb-4 hover:bg-blue-500 hover:text-white" onClick={()=>handleClick(props.todoLocations)}>
             Todo
@@ -31,10 +31,10 @@ const Sidebar = (props) => {
             Hospitals
           </button>
           
-        </div>
+        
       </div>
     </>
   );
 };
 
-export default Sidebar;
+export default LocationListSelection;

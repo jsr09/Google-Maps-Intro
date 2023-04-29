@@ -56,18 +56,7 @@ const Map = (props) => {
         center={center}
         zoom={zoom}
       ></GoogleMapReact>
-      <h1>Locations</h1>
-      <ul>
-        {locationList ? (
-          locationList.map((location) => (
-            <li key={location.id} onClick={() => handleLocationClick(location)}>
-              {location.name}
-            </li>
-          ))
-        ) : (
-          <h1>Loading...</h1>
-        )}
-      </ul>
+     
     </div>
   );
 };

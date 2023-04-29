@@ -2,8 +2,9 @@ import React from "react";
 import {createContext, useContect, useState, useEffect} from 'react'
 
 import NavBar from "./NavBar";
-import SideBar from "./SideBar";
+import LocationListSelection from "./LocationListSelection";
 import Map from "./Map";
+import Locations from "./Locations";
 
 const ListCentext = createContext();
 
@@ -79,27 +80,38 @@ function Home() {
 
   return (
     <ListCentext.Provider value={{ locationList, updateListData }}>
-    <div className="flex h-screen">
-      <div className="w-full">
-        <div className="bg-blue-500 text-white border-b-2 w-full h-12">
+    <div class="flex h-screen flex-col">
+      
+        <div class="bg-blue-500 border-solid border-2 border-black w-full h-12">
           <NavBar />
         </div>
-        <div className=" flex h-full">
-          <div className="bg-gradient-to-b from-blue-100 to-blue-500 border-r-2 w-2/5 text-blue-400">
-            <SideBar 
+
+        <div class=" flex flex-1 flex-row">
+
+          <div class="order-1 w-1/4 border-solid border-2 border-black">
+            <LocationListSelection 
             updateListData={updateListData}
             todoLocations={todoLocations}
             restaurantLocations={restaurantLocations}
             gasStationLocations={gasStationLocations}
             />
           </div>
-          <div className="border-l-2 border-r-2 w-3/5 bg-gradient-to-b from-blue-100 to-blue-500 ">
-            <div className="my-auto text-blue-400">
+
+          <div class='w-1/4 border-solid border-2 border-black'>
+            <Locations locationList={locationList}/>
+          </div>
+
+          <div class="border-l-2 border-solid border-2 border-black w-1/2 ">
+
+            <div class="order-2 flex-1 border-solid border-2 border-black">
               <Map locationList={locationList} />
             </div>
+
           </div>
+
+
         </div>
-      </div>
+      
     </div>
      </ListCentext.Provider>
   );
