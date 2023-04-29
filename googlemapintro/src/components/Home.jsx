@@ -1,10 +1,11 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
-import MyContext from "react";
-import { useEffect, useState } from "react";
+import {createContext, useContect, useState, useEffect} from 'react'
+
 import NavBar from "./NavBar";
 import SideBar from "./SideBar";
 import Map from "./Map";
+
+const ListCentext = createContext();
 
 const todoLocations = [
   {
@@ -71,7 +72,13 @@ const gasStationLocations = [
 
 function Home() {
   const [locationList, setLocationList] = useState([]);
+  //function to update the list of locations
+  const updateListData = (newListData) => {
+    setLocationList(newListData);
+  };
+
   return (
+    <ListCentext.Provider value={{ locationList, updateListData }}>
     <div className="flex h-screen">
       <div className="w-full">
         <div className="bg-blue-500 text-white border-b-2 w-full h-12">
@@ -79,7 +86,12 @@ function Home() {
         </div>
         <div className=" flex h-full">
           <div className="bg-gradient-to-b from-blue-100 to-blue-500 border-r-2 w-2/5 text-blue-400">
-            <SideBar />
+            <SideBar 
+            updateListData={updateListData}
+            todoLocations={todoLocations}
+            restaurantLocations={restaurantLocations}
+            gasStationLocations={gasStationLocations}
+            />
           </div>
           <div className="border-l-2 border-r-2 w-3/5 bg-gradient-to-b from-blue-100 to-blue-500 ">
             <div className="my-auto text-blue-400">
@@ -89,6 +101,7 @@ function Home() {
         </div>
       </div>
     </div>
+     </ListCentext.Provider>
   );
 }
 

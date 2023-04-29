@@ -10,7 +10,9 @@ const home = {
 };
 
 const Map = (props) => {
-  console.log("Line 13:props", props);
+  console.log("Line 13:props>>>>", props);
+  const {locationList} = props;
+  console.log("Line 15:locationList>>>>", locationList);
 
   localStorage.setItem(
     "home",
@@ -25,6 +27,7 @@ const Map = (props) => {
   const [zoom, setZoom] = useState(
     JSON.parse(localStorage.getItem("zoom")) || home.zoom
   );
+
   useEffect(() => {
     if (selectedLocation) {
       setCenter(selectedLocation.position);
@@ -55,8 +58,8 @@ const Map = (props) => {
       ></GoogleMapReact>
       <h1>Locations</h1>
       <ul>
-        {props.locations ? (
-          props.locatios.map((location) => (
+        {locationList ? (
+          locationList.map((location) => (
             <li key={location.id} onClick={() => handleLocationClick(location)}>
               {location.name}
             </li>
