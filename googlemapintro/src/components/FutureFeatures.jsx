@@ -10,6 +10,16 @@ const FutureFeatures = () => {
         </div>
         <div>
             <h1>Future Features Commming Soon</h1>
+            <ul>
+                <li>Sidebar with list of buttons to control location</li>
+                <li>Map on the page</li>
+                <li>List of locations below map</li>
+                <li>Map markers</li>
+                <li>Directions to apprear on map when location is clicked</li>
+                <li>Calendar below the Map</li>
+                <li>Click on Calendar appointment to get directions to appointment</li>
+                <li>Who Knows</li>
+            </ul>
         </div>
         </div>
     );
