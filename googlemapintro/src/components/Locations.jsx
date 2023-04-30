@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {setSelectedLocation} from "../store/index";
-import LocationInfo from "./LocationInfo";
 
 const Locations = () => {
   const dispatch = useDispatch();
@@ -32,7 +31,6 @@ const Locations = () => {
           <h1>Loading...</h1>
         )}
       </ul>
-      <LocationInfo />
     </div>
   );
 };
