@@ -16,11 +16,12 @@ const Locations = () => {
   };
   return (
     <div>
-      <h1 class="text-center">Location List</h1>
-      <ul class="flex flex-col w-3/4 mx-auto">
+      <h1 className="text-center">Location List</h1>
+      <ul className="flex flex-col w-3/4 mx-auto">
         {locationList.length > 0 ? (
           locationList.map((location) => (
             <button
+            key={location.id}
               className="text-center w-full bg-white text-blue-500 font-bold py-2 px-4 rounded-full mb-4 hover:bg-blue-500 hover:text-white"
               onClick={() => handleClick(location)}
             >
