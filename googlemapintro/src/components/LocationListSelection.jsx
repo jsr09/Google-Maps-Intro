@@ -5,41 +5,41 @@ import { setLocationList } from "../store/index";
 const todoLocations = [
   {
     id: 2,
-    name: "Todo Location 1",
-    position: { lat: 37.7749, lng: -122.4194 },
-    zoom: 14,
+    name: "Hair Cut",
+    position: { lat: 33.81949, lng: -116.53254 },
+    zoom: 16,
   },
   {
     id: 3,
-    name: "Todo Location 2",
-    position: { lat: 37.7749, lng: -122.4094 },
-    zoom: 14,
+    name: "Bank Robbery",
+    position: { lat: 33.82291, lng: -116.54134 },
+    zoom: 16,
   },
   {
     id: 4,
-    name: "Todo Location 3",
-    position: { lat: 37.7649, lng: -122.4194 },
-    zoom: 14,
+    name: "Golf League",
+    position: { lat: 33.82828, lng: -116.54865 },
+    zoom: 16,
   },
 ];
 
 const restaurantLocations = [
   {
     id: 5,
-    name: "Restaurant Location 1",
-    position: { lat: 37.7749, lng: -122.4194 },
+    name: "Shamrocks Irish Pub",
+    position: { lat: 33.82561, lng: -116.54669 },
     zoom: 14,
   },
   {
     id: 6,
-    name: "Restaurant Location 2",
-    position: { lat: 37.7749, lng: -122.4094 },
+    name: "China King Restaurant",
+    position: { lat: 33.82655, lng: -116.54582 },
     zoom: 14,
   },
   {
     id: 7,
-    name: "Restaurant Location 3",
-    position: { lat: 37.7649, lng: -122.4194 },
+    name: "Blaze Pizza",
+    position: { lat: 33.82538, lng: -116.54701 },
     zoom: 14,
   },
 ];
@@ -47,20 +47,20 @@ const restaurantLocations = [
 const gasStationLocations = [
   {
     id: 8,
-    name: "Gas Station Location 1",
-    position: { lat: 37.7749, lng: -122.4194 },
+    name: "Shell Gas Station",
+    position: { lat: 33.82702, lng: -116.54542 },
     zoom: 14,
   },
   {
     id: 9,
-    name: "Gas Station Location 2",
-    position: { lat: 37.7749, lng: -122.4094 },
+    name: "Mobile Gas Station",
+    position: { lat: 33.80110, lng: -116.52667 },
     zoom: 14,
   },
   {
     id: 10,
-    name: "Gas Station Location 3",
-    position: { lat: 37.7649, lng: -122.4194 },
+    name: "ARCO Gas Station",
+    position: { lat: 33.84428, lng: -116.52773 },
     zoom: 14,
   },
 ];
@@ -74,9 +74,9 @@ const LocationListSelection = () => {
 
   return (
     <>
-      <div className="text-center">List</div>
+      <div className="text-center underline-offset-4">Where too</div>
 
-      <div className="w-2/3 mx-auto">
+      <div className="w-3/4 mx-auto">
         <button
           className="w-full bg-white text-blue-500 font-bold py-2 px-4 rounded-full mb-4 hover:bg-blue-500 hover:text-white"
           onClick={() => handleClick(todoLocations)}

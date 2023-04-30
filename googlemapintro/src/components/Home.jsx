@@ -1,9 +1,9 @@
 import React from "react";
-import { useState, useEffect} from 'react'
+
 
 import NavBar from "./NavBar";
 import LocationListSelection from "./LocationListSelection";
-// import Map from "./Map";
+import Map from "./Map";
 import Locations from "./Locations";
 
 
@@ -32,9 +32,9 @@ function Home() {
 
           <div class="border-l-2 border-solid border-2 border-black w-1/2 ">
 
-            {/* <div class="order-2 flex-1 border-solid border-2 border-black">
+            <div class="order-2 flex-1 border-solid border-2 border-black">
               <Map />
-            </div> */}
+            </div>
 
           </div>
 
