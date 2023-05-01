@@ -43,7 +43,7 @@ const handleApiLoaded = (map, maps) => {
   return (
     <div className="text-center h-96 w-auto">
       <GoogleMapReact
-        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY }}
+        bootstrapURLKeys={{ key: 'AIzaSyB-6yWF0UHs4nZuJhb32oKIyOM2j0T_CLo' }}
         center={center}
         zoom={zoom}
         yesIWantToUseGoogleMapApiInternals={true}
