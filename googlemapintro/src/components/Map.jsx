@@ -15,41 +15,53 @@ const Map = () => {
   const [center, setCenter] = useState(home.position);
   const [zoom, setZoom] = useState(home.zoom);
 
-  
+  const markers = useMemo(() => {
+    return locationList.map((location) => {
+      return {
+        position: location.position,
+        title: location.name,
+      };
+    });
+  }, [locationList]);
+
+  const bounds = useMemo(() => {
+    const bounds = new window.google.maps.LatLngBounds();
+    bounds.extend(home.position);
+    markers.forEach((marker) => bounds.extend(marker.position));
+    return bounds;
+  }, [markers, home]);
 
 const handleApiLoaded = (map, maps) => {
-      const homeMarker = new maps.Marker({
-        position: home.position,
+
+    markers.forEach((marker) => {
+      new maps.Marker({
+        position: marker.position,
         map: map,
-        title: home.name,
+        title: marker.title,
       });
+    });
 
-      const markers = locationList.map((location) => {
-        const marker = new maps.Marker({
-          position: location.position,
-          map: map,
-          title: location.name,
-        });
-        return marker;
-      });
+    map.fitBounds(bounds);
+  };
 
-      const bounds = new maps.LatLngBounds();
-      bounds.extend(homeMarker.getPosition());
-      markers.forEach((marker) => bounds.extend(marker.getPosition()));
-      map.fitBounds(bounds);
-    };
+
+  //   const bounds = new maps.LatLngBounds();
+  //   bounds.extend(homeMarker.getPosition());
+  //   markers.forEach((marker) => bounds.extend(marker.getPosition()));
+  //   map.fitBounds(bounds);
+  // }, [home, locationList]);
 
    
   return (
     <div className="text-center h-96 w-auto">
       <GoogleMapReact
-        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY }}
+        bootstrapURLKeys={{ key: "AIzaSyB-6yWF0UHs4nZuJhb32oKIyOM2j0T_CLo" }}
         center={center}
         zoom={zoom}
         yesIWantToUseGoogleMapApiInternals={true}
         onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
       >
-        <LocationMarker
+        {/* <LocationMarker
           lat={home.position.lat}
           lng={home.position.lng}
           
@@ -61,7 +73,7 @@ const handleApiLoaded = (map, maps) => {
             lng={selectedLocation.position.lng}
             name={selectedLocation.name}
           />
-        )}
+        )} */}
       </GoogleMapReact>
     </div>
   );
