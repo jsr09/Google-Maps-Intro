@@ -1,28 +1,28 @@
-// import React from "react";
-// import { useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 
 
-// const LocationInfo = () => {
-//   const selectedLocation = useSelector((state) => state.selectedLocation);
-//   console.log('Line 9 SELECTED LOCATION>>>', selectedLocation)
+const LocationInfo = () => {
+  const selectedLocation = useSelector((state) => state.selectedLocation);
+  console.log('Line 9 SELECTED LOCATION>>>', selectedLocation)
 
-//   if(!selectedLocation) {
-//     return <p>There is no state</p>;
-//   }
+  if(!selectedLocation) {
+    return <p>There is no state</p>;
+  }
 
-//   return (
-//     <div>
+  return (
+    <div>
       
-//         <div>
-//           <h2>{selectedLocation.name}</h2>
-//           <p>Latitude: {selectedLocation.position.lat}</p>
-//           <p>Longitude: {selectedLocation.position.lng}</p>
-//         </div>
+        <div>
+          <h2>{selectedLocation.name}</h2>
+          <p>Latitude: {selectedLocation.position.lat}</p>
+          <p>Longitude: {selectedLocation.position.lng}</p>
+        </div>
       
         
     
-//     </div>
-//   );
-// };
+    </div>
+  );
+};
 
-// export default LocationInfo;
+export default LocationInfo;
