@@ -1,63 +1,68 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {setSelectedLocation} from "../store/index";
-
+import React, { useEffect, useState } from "react";
+import { useMemo } from "react";
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import { useSelector } from "react-redux";
 import GoogleMapReact from "google-map-react";
 import LocationMarker from "./LocationMarker";
 
-
-
 const Map = () => {
-const dispatch = useDispatch();
+  const home = useSelector((state) => state.locationList.defaultLocation);
+  const selectedLocation = useSelector(
+    (state) => state.locationList.selectedLocation
+  );
+  const locationList = useSelector((state) => state.locationList.locationList);
 
-const home = useSelector((state) => state.locationList.defaultLocation);
-console.log('Line 12 HOME>>>', home);
-const selectedLocation = useSelector((state) => state.locationList.selectedLocation);
-console.log('line 13 SELECTED LOCATION>>>', selectedLocation);
-const locationList = useSelector((state) => state.locationList.locationList);
-console.log('line 16 LOCATION LIST>>>', locationList);
+  const [center, setCenter] = useState(home.position);
+  const [zoom, setZoom] = useState(home.zoom);
 
-    
-  const [center, setCenter] = useState();
-  const [zoom, setZoom] = useState();
+  
 
-  useEffect(() => {
-    if (selectedLocation) {
-      setCenter(selectedLocation.position);
-      setZoom(selectedLocation.zoom);
-    } else {
-      setCenter(home.position);
-      setZoom(home.zoom);
-    }
-  },[selectedLocation, home]);
+const handleApiLoaded = (map, maps) => {
+      const homeMarker = new maps.Marker({
+        position: home.position,
+        map: map,
+        title: home.name,
+      });
 
-  useEffect(() => {
-    if (locationList) {
-      dispatch(setSelectedLocation(locationList[0]));
-    }
-  }, [locationList, dispatch]);
+      const markers = locationList.map((location) => {
+        const marker = new maps.Marker({
+          position: location.position,
+          map: map,
+          title: location.name,
+        });
+        return marker;
+      });
 
+      const bounds = new maps.LatLngBounds();
+      bounds.extend(homeMarker.getPosition());
+      markers.forEach((marker) => bounds.extend(marker.getPosition()));
+      map.fitBounds(bounds);
+    };
+
+   
   return (
     <div className="text-center h-96 w-auto">
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY }}
         center={center}
         zoom={zoom}
+        yesIWantToUseGoogleMapApiInternals={true}
+        onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
       >
-        {locationList.length > 0 &&
-          locationList.map((location) => (
-            <LocationMarker
-              key={location.id}
-              lat={location.position.lat}
-              lng={location.position.lng}
-              name={location.name}
-            />
-          ))}
-        {!selectedLocation && (
-          <LocationMarker lat={home.position.lat} lng={home.position.lng} name={home.name} />
-        )}
+        <LocationMarker
+          lat={home.position.lat}
+          lng={home.position.lng}
+          
+        />
+
+        {/* {selectedLocation && selectedLocation.position && (
+          <LocationMarker
+            lat={selectedLocation.position.lat}
+            lng={selectedLocation.position.lng}
+            name={selectedLocation.name}
+          />
+        )} */}
       </GoogleMapReact>
-     
     </div>
   );
 };
