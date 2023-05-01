@@ -55,13 +55,13 @@ const handleApiLoaded = (map, maps) => {
           
         />
 
-        {/* {selectedLocation && selectedLocation.position && (
+        {selectedLocation && selectedLocation.position && (
           <LocationMarker
             lat={selectedLocation.position.lat}
             lng={selectedLocation.position.lng}
             name={selectedLocation.name}
           />
-        )} */}
+        )}
       </GoogleMapReact>
     </div>
   );
