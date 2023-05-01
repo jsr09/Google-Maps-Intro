@@ -1,70 +1,51 @@
-import React, { useEffect, useState } from "react";
-import { useMemo } from "react";
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-import { useSelector } from "react-redux";
-import GoogleMapReact from "google-map-react";
-import LocationMarker from "./LocationMarker";
+import React, { useMemo } from 'react';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import {getGeocode, getlatlng} from'use-places-autocomplete';
+import { ComboBox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption } from '@reach/combobox';
+import '@reach/combobox/styles.css';
 
-const Map = () => {
-  const home = useSelector((state) => state.locationList.defaultLocation);
-  const selectedLocation = useSelector(
-    (state) => state.locationList.selectedLocation
-  );
-  const locationList = useSelector((state) => state.locationList.locationList);
-
-  const [center, setCenter] = useState(home.position);
-  const [zoom, setZoom] = useState(home.zoom);
-
-  
-
-const handleApiLoaded = (map, maps) => {
-      const homeMarker = new maps.Marker({
-        position: home.position,
-        map: map,
-        title: home.name,
-      });
-
-      const markers = locationList.map((location) => {
-        const marker = new maps.Marker({
-          position: location.position,
-          map: map,
-          title: location.name,
-        });
-        return marker;
-      });
-
-      const bounds = new maps.LatLngBounds();
-      bounds.extend(homeMarker.getPosition());
-      markers.forEach((marker) => bounds.extend(marker.getPosition()));
-      map.fitBounds(bounds);
-    };
-
-   
-  return (
-    <div className="text-center h-96 w-auto">
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY }}
-        center={center}
-        zoom={zoom}
-        yesIWantToUseGoogleMapApiInternals={true}
-        onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
-      >
-        <LocationMarker
-          lat={home.position.lat}
-          lng={home.position.lng}
-          
-        />
-
-        {/* {selectedLocation && selectedLocation.position && (
-          <LocationMarker
-            lat={selectedLocation.position.lat}
-            lng={selectedLocation.position.lng}
-            name={selectedLocation.name}
-          />
-        )} */}
-      </GoogleMapReact>
-    </div>
-  );
+const containerStyle = {
+  width: '100%',
+  height: '100vh'
 };
 
-export default Map;
+
+
+function Map() {
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: "AIzaSyB-6yWF0UHs4nZuJhb32oKIyOM2j0T_CLo",
+    libraries: ['places'],
+  });
+
+  const center = useMemo(() => ({
+  lat: 33.82069,
+  lng: -116.54814
+}),[]);
+
+  // const [map, setMap] = React.useState(null);
+
+  // const onLoad = React.useCallback(function callback(map) {
+  //   const bounds = new window.google.maps.LatLngBounds(center);
+  //   map.fitBounds(bounds);
+  //   setMap(map);
+  // }, []);
+
+  // const onUnmount = React.useCallback(function callback(map) {
+  //   setMap(null);
+  // }, []);
+
+  return isLoaded ? (
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={center}
+      zoom={10}
+      // onLoad={onLoad}
+      // onUnmount={onUnmount}
+    >
+      <Marker position={center} />
+    </GoogleMap>
+  ) : <>loading...</>;
+}
+
+export default React.memo(Map);
