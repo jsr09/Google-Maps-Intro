@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { GoogleMap, useJsApiLoader, Marker, LoadScript } from "@react-google-maps/api";
+import { GoogleMap, Marker, LoadScript, InfoWindow } from "@react-google-maps/api";
 import { getGeocode, getlatlng } from "use-places-autocomplete";
 import {
   ComboBox,
@@ -20,8 +20,11 @@ const libraries = ['places']
 
 function Map() {
   const mapRef = useRef(null);
+
+  
   const [mapCenter, setMapCenter] = useState(null);
   const [selected, setSelected] = useState(null);
+  const [zoom, setZoom] = useState(null);
 
   const home = useSelector((state) => state.locationList.defaultLocation);
   console.log("Line 17 In Map>>>Home", home);
@@ -32,6 +35,7 @@ function Map() {
   const location = useSelector((state) => state.locationList.selectedLocation);
   console.log("Line 23 In Map>>>location", location);
 
+  
   useEffect(() => {
     if (location.id) {
       // If a location is selected, center on the selected location
@@ -57,30 +61,52 @@ function Map() {
   }, []);
 
   return (
-    <>
-    <div className='border rounded-lg py-2 px-3 text-grey-darkest'><PlacesAutocomplete setSelected={setSelected}/></div>
-    <LoadScript googleMapsApiKey="AIzaSyB-6yWF0UHs4nZuJhb32oKIyOM2j0T_CLo" libraries={libraries}>
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={mapCenter}
-        zoom={location.zoom || home.zoom}
-        onLoad={onMapLoad}
+  <div>
+    {home && (
+      <LoadScript
+        googleMapsApiKey="AIzaSyB-6yWF0UHs4nZuJhb32oKIyOM2j0T_CLo"
+        libraries={libraries}
       >
-        {location.id ? (
-          <Marker position={location.position} />
-        ) : (
-          locationList.length > 0 ? (
-            locationList.map((location) => (
-              <Marker key={location.id} position={location.position} />
-            ))
-          ) : (
-            <>Loading...Maybe...</> 
-          )
-        )}
-      </GoogleMap>
-    </LoadScript>
-    </>
-  );
-};
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={mapCenter}
+          zoom={location.zoom || home.zoom}
+          onLoad={onMapLoad}
+        >
+          {locationList.length > 0 && (
+            <>
+              {locationList.map((location) => (
+                <Marker
+                  key={location.id}
+                  position={location.position}
+                  onClick={() => setSelected(location)}
+                />
+              ))}
+              {location && (
+                <Marker
+                  position={location.position}
+                  onClick={() => setSelected(location)}
+                />
+              )}
+            </>
+          )}
+          {home && (
+            <Marker position={home.position} />
+          )}
+          {/* {selected && (
+            <InfoWindow
+              position={selected.position}
+              onCloseClick={() => setSelected(null)}
+            >
+              <div>{selected.title}</div>
+            </InfoWindow>
+          )} */}
+        </GoogleMap>
+      </LoadScript>
+    )}
+  </div>
+);
+
+}
 
 export default Map;

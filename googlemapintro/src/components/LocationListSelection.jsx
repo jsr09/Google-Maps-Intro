@@ -7,19 +7,19 @@ const todoLocations = [
     id: 2,
     name: "Hair Cut",
     position: { lat: 33.81949, lng: -116.53254 },
-    zoom: 16,
+    zoom: 20,
   },
   {
     id: 3,
     name: "Bank Robbery",
     position: { lat: 33.82291, lng: -116.54134 },
-    zoom: 16,
+    zoom: 20,
   },
   {
     id: 4,
     name: "Golf League",
     position: { lat: 33.82828, lng: -116.54865 },
-    zoom: 16,
+    zoom: 20,
   },
 ];
 
@@ -28,19 +28,19 @@ const restaurantLocations = [
     id: 5,
     name: "Shamrocks Irish Pub",
     position: { lat: 33.82561, lng: -116.54669 },
-    zoom: 14,
+    zoom: 18,
   },
   {
     id: 6,
     name: "China King Restaurant",
     position: { lat: 33.82655, lng: -116.54582 },
-    zoom: 14,
+    zoom: 18,
   },
   {
     id: 7,
     name: "Blaze Pizza",
     position: { lat: 33.82538, lng: -116.54701 },
-    zoom: 14,
+    zoom: 18,
   },
 ];
 
@@ -49,19 +49,19 @@ const gasStationLocations = [
     id: 8,
     name: "Shell Gas Station",
     position: { lat: 33.82702, lng: -116.54542 },
-    zoom: 14,
+    zoom: 16,
   },
   {
     id: 9,
     name: "Mobile Gas Station",
     position: { lat: 33.80110, lng: -116.52667 },
-    zoom: 14,
+    zoom: 16,
   },
   {
     id: 10,
     name: "ARCO Gas Station",
     position: { lat: 33.84428, lng: -116.52773 },
-    zoom: 14,
+    zoom: 16,
   },
 ];
 
@@ -74,7 +74,7 @@ const LocationListSelection = () => {
 
   return (
     <>
-      <div className="text-center underline-offset-4">Where too</div>
+      <div className="text-center underline-offset-4">Where to</div>
 
       <div className="w-3/4 mx-auto">
         <button

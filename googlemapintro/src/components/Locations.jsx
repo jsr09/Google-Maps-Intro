@@ -1,5 +1,4 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {setSelectedLocation} from "../store/index";
 
@@ -16,7 +15,7 @@ const Locations = () => {
   };
   return (
     <div>
-      <h1 className="text-center">Location List</h1>
+      <h1 className="text-center">Where To List</h1>
       <ul className="flex flex-col w-3/4 mx-auto">
         {locationList.length > 0 ? (
           locationList.map((location) => (
