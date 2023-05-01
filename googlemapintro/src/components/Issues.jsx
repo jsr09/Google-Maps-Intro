@@ -8,16 +8,16 @@ const Issues = () => {
         <NavBar />
       </div>
 
-      <div>Issues</div>
+      <div className="text-center font-extrabold leading-loose">Issues</div>
 
-      <ul>
-        <li>Issue 1 using dotenv with react in a browser - dotenv-webpack</li>
-        <li>Issue 2 map would initial not render - React.StrictMode</li>
-        <li>Issue 3 tailwind folding</li>
-        <li>Issue 3 map would not re-center if page was refreshed - used local storage to store a default/current location</li>
-        <li>Issue 4 managing state- attempted to use react createContext instead of redux</li>
-        <li>Issue 5 google-map-ract seems to be made for those who want to customize their map</li>
-        <li>Issue 6 @react-google-maps/api doesn't like Tailwindcss</li>
+      <ul className="text-center leading-loose">
+        <li>Using dotenv with react in a browser - dotenv-webpack</li>
+        <li>Map would initial not render - React.StrictMode</li>
+        <li>Tailwind folding</li>
+        <li>Map would not re-center if page was refreshed - used local storage to store a default/current location</li>
+        <li>Managing state- attempted to use react createContext instead of redux</li>
+        <li>Google-map-ract seems to be made for those who want to customize their map</li>
+        <li>@react-google-maps/api doesn't like Tailwindcss</li>
       </ul>
 
     </div>

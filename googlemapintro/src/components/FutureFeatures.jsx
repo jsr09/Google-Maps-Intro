@@ -9,10 +9,10 @@ const FutureFeatures = () => {
         <NavBar />
       </div>
       <div>
-        <h1 className="font-bold">Future Features Commming Soon</h1>
-        <ul>
+        <h1 className="font-bold text-center">Future Features Commming Soon</h1>
+        <ul className="text-center leading-loose">
           <h2 className="text-center text-green-600">Completed Features</h2>
-          <li>Sidebar with list of buttons to control location</li>
+          <li className="">Sidebar with list of buttons to control location</li>
           <li>Map on the page</li>
           <li>List of locations below map</li>
           <li>Map markers</li>
